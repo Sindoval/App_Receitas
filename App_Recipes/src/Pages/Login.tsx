@@ -34,7 +34,7 @@ export default function Login() {
 
   const buttonClick = () => {
     localStorage.setItem('user', `{ email: ${email} }`);
-    navigate('/recipes');
+    navigate('/meals');
   };
 
   return (
