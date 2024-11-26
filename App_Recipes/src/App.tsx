@@ -1,15 +1,23 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from './Pages/Login';
-import Recipes from './Pages/Recipes';
+import './App.css';
+import Meals from './Pages/Meals';
+import Drinks from './Pages/Drinks/Drinks';
+import Profile from './Pages/Profile';
+import ContextProviders from './context/ContextProviders';
+import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={ <Login /> } />
-      <Route path="recipes" element={ <Recipes /> } />
-      <Route path="recipes/meals" />
-      <Route path="recipes/drinks" />
-      <Route path="profile" />
-    </Routes>
+    <ContextProviders>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/meals" element={<Meals />} />
+        <Route path="/drinks" element={<Drinks />} />
+        <Route path="/meals/:id" element={<RecipeDetails />} />
+        <Route path="/drinks/:id" element={<RecipeDetails />} />
+        <Route path="profile" element={<Profile />} />
+      </Routes>
+    </ContextProviders>
   );
 }

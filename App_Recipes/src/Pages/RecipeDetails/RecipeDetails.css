@@ -1,0 +1,86 @@
+* {
+  padding:0;
+  margin:0;
+  vertical-align:baseline;
+  list-style:none;
+  border:0;
+  box-sizing: border-box; /* Garante que padding/border não estoure o layout */
+  }
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#ingredientes {
+  width: 90%;
+  margin: 2em;
+  line-height: 1.8;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid rgb(153, 153, 153);
+
+}
+
+#ingredientes img {
+  max-width: 30%;
+  height: 30%;
+  border-radius: 4px;
+  margin: 1em;
+}
+
+#list {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+#instrucao {
+  width: 90%;
+  text-align: center;
+  margin: 2em;
+  line-height: 1.8;
+  border: 1px solid rgb(153, 153, 153);
+}
+
+#video {
+  width: 50%;
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(153, 153, 153);
+}
+
+#video iframe {
+  max-width: 100%;
+  margin-bottom: 2em;
+}
+
+main h2 {
+  margin: 1em;
+}
+
+#rec {
+  width: 90%;
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#random {
+  display: flex;
+  justify-content: center;
+}
