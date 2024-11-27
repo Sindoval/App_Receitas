@@ -7,6 +7,10 @@
   box-sizing: border-box; /* Garante que padding/border não estoure o layout */
   }
 
+body {
+  text-align: center;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -23,19 +27,19 @@ main {
 #ingredientes {
   width: 90%;
   margin: 2em;
+  padding: 1em 0;
   line-height: 1.8;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border: 1px solid rgb(153, 153, 153);
-
 }
 
 #ingredientes img {
   max-width: 30%;
   height: 30%;
   border-radius: 4px;
-  margin: 1em;
+  margin: 1.5em;
 }
 
 #list {
@@ -53,7 +57,8 @@ main {
 }
 
 #video {
-  width: 50%;
+  width: 90%;
+  max-width: 40rem;
   margin: 2em;
   display: flex;
   flex-direction: column;
@@ -63,8 +68,7 @@ main {
 }
 
 #video iframe {
-  max-width: 100%;
-  margin-bottom: 2em;
+  width: 100%;
 }
 
 main h2 {
@@ -73,14 +77,55 @@ main h2 {
 
 #rec {
   width: 90%;
+  max-width: 40rem;
   margin: 2em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px solid rgb(153, 153, 153);
+  margin-bottom: 6em;
 }
 
 #random {
+  width: 90%;
   display: flex;
-  justify-content: center;
+  border: 1px solid rgb(153, 153, 153);
+  margin-bottom: 1em;
+  overflow-x: auto; /* Adiciona scroll horizontal se necessário */
+  scrollbar-width: thin;
+}
+
+#random::-webkit-scrollbar {
+  height: 8px; /* Altura da barra de rolagem no Chrome, Edge, Safari */
+}
+
+#random::-webkit-scrollbar-thumb {
+  background: #888; /* Cor da barra */
+  border-radius: 4px;
+}
+
+#random::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cor do fundo da barra */
+}
+
+footer {
+  width: 100vw;
+  height: 8%;
+  position: fixed;
+  bottom: 0;
+}
+
+footer button {
+  width: 100%;
+  max-width: 40rem;
+  height: 100%;
+  border-radius: 8px;
+  background-color: rgba(247, 203, 8, 0.938);
+  color: white;
+  font-weight: bold;
+}
+
+footer button:hover {
+  background-color: rgba(247, 203, 8);;
 }

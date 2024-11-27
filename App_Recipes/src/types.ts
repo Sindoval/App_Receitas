@@ -60,3 +60,24 @@ export type FilterCategory = {
 
 export type FilterAPIResponse =
 { drinks: FilterCategory[] } | { meals: FilterCategory[] };
+
+
+export type DoneRecipe = {
+  id: string,
+  type: 'meal' | 'drink',
+  region: string | '',
+  alcoholicOrNot: 'alcoholic' | 'non-alcoholic' | '',
+  name:  string,
+  image: string,
+  doneDate: string,
+  tags: string | '',
+}
+
+export type InProgressRecipes = {
+  drinks: {
+    [id: string]: IngredientsType;
+  };
+  meals: {
+    [id: string]: IngredientsType;
+  };
+};

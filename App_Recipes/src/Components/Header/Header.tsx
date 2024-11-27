@@ -144,32 +144,36 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
           </div>
 
           <div className="radios">
-            <label htmlFor="ingredient">Ingredient</label>
-            <input
-              type="radio"
-              name="filter"
-              id="ingredient"
-              value="Ingredient"
-              onChange={(e) => handleInputSearch(e)}
-            />
-
-            <label htmlFor="name">Name</label>
-            <input
-              type="radio"
-              name="filter"
-              id="name"
-              value="Name"
-              onChange={(e) => handleInputSearch(e)}
-            />
-
-            <label htmlFor="first-letter">First letter</label>
-            <input
-              type="radio"
-              name="filter"
-              id="first-letter"
-              value="First letter"
-              onChange={(e) => handleInputSearch(e)}
-            />
+            <div>
+              <label htmlFor="ingredient">Ingredient</label>
+              <input
+                type="radio"
+                name="filter"
+                id="ingredient"
+                value="Ingredient"
+                onChange={(e) => handleInputSearch(e)}
+              />
+            </div>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+               type="radio"
+                name="filter"
+                id="name"
+                value="Name"
+                onChange={(e) => handleInputSearch(e)}
+              />
+            </div>
+            <div>
+              <label htmlFor="first-letter">First letter</label>
+              <input
+                type="radio"
+                name="filter"
+                id="first-letter"
+                value="First letter"
+                onChange={(e) => handleInputSearch(e)}
+              />
+            </div>
           </div>
           <button
             onClick={clickSearch}

@@ -1,5 +1,5 @@
 .footer {
-  background-color: rgb(255, 255, 6);
+  background-color: rgba(247, 203, 8, 0.938);
   display: flex;
   justify-content: space-around;
   bottom: 0;
@@ -10,11 +10,11 @@
 }
 
 .footer img {
-  background-color: rgb(255, 255, 6);
+  background-color: rgba(247, 203, 8, 0.938);
   margin: 0%;
   padding: 0;
 }
 
 .footer button {
-  background-color: rgb(255, 255, 6);
+  background-color: rgba(247, 203, 8, 0.938);
 }
