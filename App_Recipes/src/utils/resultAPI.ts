@@ -211,21 +211,21 @@ export const formatRecipeMeal = (recipe: any): MealsAPIFilter => {
   };
 };
 
-const formatRecipeForIngredient = (recipeType: 'drink' | 'meal', recipe:any):MealsAPIFilter => {
+const formatRecipeForIngredient = (recipeType: 'drink' | 'meal', recipe:any):MealsAPIFilter | DrinksAPIFilter => {
   if (recipeType === 'drink') {
     const result = {
       id: recipe.idDrink,
       name: recipe.strDrink,
       image: recipe.strDrinkThumb,
     };
-    return result;
+    return result as DrinksAPIFilter;
   }
   const result = {
     id: recipe.idMeal,
     name: recipe.strMeal,
     image: recipe.strMealThumb,
   };
-  return result;
+  return result as MealsAPIFilter;
 };
 
 export const randomRecipes = async (recipe: 'drinks' | 'meals', quantidade: number):Promise<MealsAPIFilter[] | DrinksAPIFilter[]> => {

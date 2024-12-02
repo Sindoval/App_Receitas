@@ -40,14 +40,13 @@ export default function CardRecipe({ cardData }: { cardData: CardRecipeType }) {
         <span>{name}</span>
       </div>
     );
-  } else {
-    return (
-      <div className="card">
-        <Link to={`/meals/${id}`}>
-          <img src={image} alt={name} />
-        </Link>
-        <span>{name}</span>
-      </div>
-    );
   }
+  return (
+    <div className="card">
+      <Link to={`/meals/${id}`}>
+        <img src={image} alt={name} />
+      </Link>
+      <span>{name}</span>
+    </div>
+  );
 }
