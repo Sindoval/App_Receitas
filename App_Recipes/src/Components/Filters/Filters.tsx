@@ -35,24 +35,23 @@ export default function Filters({ filterData }: { filterData: FilterProp }) {
         ))}
       </div>
     );
-  } else {
-    return (
-      <div className="filters">
-        <div className="filter" key="all">
-          <button onClick={() => filterRecipe('meal', 'all')}>
-            <img src={mealIcon} alt="meal-icon" />
-          </button>
-          <span>All</span>
-        </div>
-        {mealFilters.map((filter) => (
-          <div className="filter" key={filter}>
-            <button onClick={() => filterRecipe('meal', filter)}>
-              <img src={mealFilterIcon} alt="" />
-            </button>
-            <span>{filter}</span>
-          </div>
-        ))}
-      </div>
-    );
   }
+  return (
+    <div className="filters">
+      <div className="filter" key="all">
+        <button onClick={() => filterRecipe('meal', 'all')}>
+          <img src={mealIcon} alt="meal-icon" />
+        </button>
+        <span>All</span>
+      </div>
+      {mealFilters.map((filter) => (
+        <div className="filter" key={filter}>
+          <button onClick={() => filterRecipe('meal', filter)}>
+            <img src={mealFilterIcon} alt="" />
+          </button>
+          <span>{filter}</span>
+        </div>
+      ))}
+    </div>
+  );
 }

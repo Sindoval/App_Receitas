@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { fetchRecipeById, randomRecipes } from '../../utils/resultAPI';
 import { DoneRecipe, DrinksAPIFilter, InProgressRecipes, MealsAPIFilter } from '../../types';
 import './RecipeDetails.css';
-import mealsImage from '../../images/meals.webp';
-import drinksImage from '../../images/drinks.avif';
 import { getYouTubeEmbedUrl } from '../../utils/stringFilter';
 import CardRecipe from '../../Components/CardRecipe/CardRecipe';
+import Ingredients from '../../Components/Ingredients/Ingredients';
+import Instructions from '../../Components/Instructions/Instructions';
+import HeaderDetails from '../../Components/HeaderDetails/HeaderDetails';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState<MealsAPIFilter | DrinksAPIFilter>();
@@ -18,6 +19,7 @@ export default function RecipeDetails() {
   const { id } = useParams();
   const { pathname } = window.location;
   const recipeType = pathname.includes('meals') ? 'meals' : 'drinks';
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -67,51 +69,14 @@ export default function RecipeDetails() {
       image,
       video,
       ingredients,
+      category,
     } = recipe as DrinksAPIFilter;
     return (
       <div>
-        <header
-          id="header"
-          style={{
-            backgroundImage: `url(${drinksImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            height: '50vh', // ajuste a altura conforme necessário
-            width: '100%',
-            color: 'white', // cor do texto sobre o background Alcoholic Non alcoholic
-          }}
-        >
-          <h1>{name.toUpperCase()}</h1>
-          <span>({alcoholic})</span>
-        </header>
+        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drink'}} />
         <main>
-
-          <section id="ingredientes">
-            <div id="list">
-              <h2>Ingredients</h2>
-              <ol>
-                {ingredients && (
-                  ingredients.map(({ ingredient, measure }) => (
-                    <li
-                      key={ingredient}
-                    >
-                      - {ingredient} - {measure}
-                    </li>
-                  ))
-                )}
-              </ol>
-            </div>
-            <img src={image} alt={name} />
-          </section>
-
-          <section id="instrucao">
-            <h2>Instructions</h2>
-            <div>
-              <p>{instructions}</p>
-            </div>
-          </section>
-
+          <Ingredients ingredientsData={{page: 'details', ingredients, image, name}} />
+          <Instructions instructionsData={{instructions}} />
           {video && (
             <section id="video">
               <h2>Vídeo</h2>
@@ -123,7 +88,6 @@ export default function RecipeDetails() {
               />
             </section>
           )}
-
           <section id="rec">
             <h2>Recommended</h2>
             <div id="random">
@@ -142,9 +106,9 @@ export default function RecipeDetails() {
           </section>
         </main>
         {!recipeVerify && (
-        <footer>
+          <footer>
           {!inProgressDrink ? (
-            <button>START RECIPE</button>
+            <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
           ) : (
             <button>CONTINUE RECIPE</button>
           )}
@@ -154,49 +118,13 @@ export default function RecipeDetails() {
     );
   }
   if (recipe && recipeType === 'meals') {
-    const { name, image, instructions, ingredients, video } = recipe as MealsAPIFilter;
+    const { name, image, instructions, ingredients, video, region} = recipe as MealsAPIFilter;
     return (
       <div>
-        <header
-          id="header"
-          style={{
-            backgroundImage: `url(${mealsImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            height: '40vh', // ajuste a altura conforme necessário
-            width: '100%',
-            color: 'white', // cor do texto sobre o background
-          }}
-        >
-          <h1>{name.toUpperCase()}</h1>
-        </header>
+        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meal'}} />
         <main>
-
-          <section id="ingredientes">
-            <div id="list">
-              <h2>Ingredients</h2>
-              <ol>
-                {ingredients && (
-                  ingredients.map(({ ingredient, measure }) => (
-                    <li
-                      key={ingredient}
-                    >
-                      - {ingredient} - {measure}
-                    </li>
-                  ))
-                )}
-              </ol>
-            </div>
-            <img src={image} alt={name} />
-          </section>
-
-          <section id="instrucao">
-            <h2>Instructions</h2>
-            <div>
-              <p>{instructions}</p>
-            </div>
-          </section>
+        <Ingredients ingredientsData={{page: 'details', ingredients, image, name}}/>
+        <Instructions instructionsData={{instructions}} />
 
           {video && (
             <section id="video">
@@ -228,19 +156,20 @@ export default function RecipeDetails() {
           </section>
         </main>
         {!recipeVerify && (
-        <footer>
-        {!inProgressMeal ? (
-          <button>START RECIPE</button>
-        ) : (
-          <button>CONTINUE RECIPE</button>
-        )}
-      </footer>
+          <footer>
+            {!inProgressMeal ? (
+            <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
+            ) : (
+            <button>CONTINUE RECIPE</button>
+            )}
+          </footer>
         )}
       </div>
     );
   }
   return null;
 }
+
 /* a chave inProgressRecipes deve conter a seguinte estrutura:
 {
     drinks: {
