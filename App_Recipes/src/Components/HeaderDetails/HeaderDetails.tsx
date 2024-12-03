@@ -9,7 +9,7 @@ import compIcon from '../../images/compartilhar.png';
 import heartIcon from '../../images/heart.png';
 
 type HeaderDetailsProp = {
-  recipeType: 'meal' | 'drink',
+  recipeType: 'meals' | 'drinks',
   recipe: {
     id: string,
     name: string,
@@ -69,7 +69,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
   };
 
   const compButton = () => {
-    const URL = window.location.href;
+    const URL = `http://127.0.0.1:5173/${recipeType}/${recipe.id}`;
     copy(URL)
       .then(() => {
         Swal.fire({
@@ -85,7 +85,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
       });
   };
 
-  if (recipeType === 'drink') {
+  if (recipeType === 'drinks') {
     const { name, alcoholic } = recipe as DrinksAPIFilter;
 
     return (
@@ -106,13 +106,13 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
             <img src={compIcon} alt="icon" />
           </button>
           {favorite ? (
-          <button onClick={ favoriteButton }>
-          <img src={yellowHeartIcon} alt="heart icon" />
+            <button onClick={ favoriteButton }>
+            <img src={yellowHeartIcon} alt="heart icon" />
             </button>
           ) : (
-          <button onClick={ favoriteButton }>
-          <img src={heartIcon} alt="heart icon" />
-          </button>
+            <button onClick={ favoriteButton }>
+            <img src={heartIcon} alt="heart icon" />
+            </button>
           )}
         </div>
         <h1>{name.toUpperCase()}</h1>
@@ -120,10 +120,10 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
           ({alcoholic})
         </span>
       </header>
-  );
+    );
   }
 
-  const { name } = recipe;
+  const { name, region } = recipe;
 
   return (
     <header
@@ -140,7 +140,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
     >
       <div id="icons">
         <button onClick={ compButton }>
-          <img src={compIcon} alt="icon" />``
+          <img src={compIcon} alt="icon" />
         </button>
         {favorite ? (
           <button onClick={ favoriteButton }>
@@ -153,17 +153,9 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
         )}
       </div>
       <h1>{name.toUpperCase()}</h1>
+      <span>
+          ({region})
+      </span>
     </header>
   );
 }
-/* 
-a chave favoriteRecipes deve conter a seguinte estrutura:
-[{
-    id: id-da-receita,
-    type: meal-ou-drink,
-    nationality: nacionalidade-da-receita-ou-texto-vazio,
-    category: categoria-da-receita-ou-texto-vazio,
-    alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-    name: nome-da-receita,
-    image: imagem-da-receita
-}] */

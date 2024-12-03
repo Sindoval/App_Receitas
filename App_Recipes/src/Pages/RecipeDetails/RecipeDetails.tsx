@@ -26,7 +26,6 @@ export default function RecipeDetails() {
       if (id) {
         const recipeById = await fetchRecipeById(id, recipeType);
         setRecipe(recipeById);
-        console.log(recipeById);
       }
     };
 
@@ -48,8 +47,8 @@ export default function RecipeDetails() {
 
       if (progressRecipes) {
         const storageProgress: InProgressRecipes = JSON.parse(progressRecipes);
-        const verifyDrink = Object.keys(storageProgress.drinks).some((v) => v === id);
-        const verifyMeal = Object.keys(storageProgress.meals).some((v) => v === id);
+        const verifyDrink = storageProgress.drinks && Object.keys(storageProgress.drinks).some((v) => v === id);
+        const verifyMeal = storageProgress.meals && Object.keys(storageProgress.meals).some((v) => v === id);
         setInProgressDrink(verifyDrink);
         setInProgressMeal(verifyMeal);
       }
@@ -73,9 +72,9 @@ export default function RecipeDetails() {
     } = recipe as DrinksAPIFilter;
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drink'}} />
+        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks'}} />
         <main>
-          <Ingredients ingredientsData={{page: 'details', ingredients, image, name}} />
+          <Ingredients ingredientsData={{page: 'details', id: recipe.id, ingredients, image, name}} />
           <Instructions instructionsData={{instructions}} />
           {video && (
             <section id="video">
@@ -107,12 +106,12 @@ export default function RecipeDetails() {
         </main>
         {!recipeVerify && (
           <footer>
-          {!inProgressDrink ? (
-            <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
-          ) : (
-            <button>CONTINUE RECIPE</button>
-          )}
-        </footer>
+            {!inProgressDrink ? (
+              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
+            ) : (
+              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>CONTINUE RECIPE</button>
+            )}
+          </footer>
         )}
       </div>
     );
@@ -121,14 +120,13 @@ export default function RecipeDetails() {
     const { name, image, instructions, ingredients, video, region} = recipe as MealsAPIFilter;
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meal'}} />
+        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meals'}} />
         <main>
-        <Ingredients ingredientsData={{page: 'details', ingredients, image, name}}/>
-        <Instructions instructionsData={{instructions}} />
+          <Ingredients ingredientsData={{page: 'details',id: recipe.id, ingredients, image, name}}/>
+          <Instructions instructionsData={{instructions}} />
 
           {video && (
             <section id="video">
-              <h2>Vídeo</h2>
               <iframe
                 src={getYouTubeEmbedUrl(video)}
                 width="560"
@@ -158,9 +156,9 @@ export default function RecipeDetails() {
         {!recipeVerify && (
           <footer>
             {!inProgressMeal ? (
-            <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
+              <button onClick={() => navigate(`/meals/${id}/in-progress`)}>START RECIPE</button>
             ) : (
-            <button>CONTINUE RECIPE</button>
+              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>CONTINUE RECIPE</button>
             )}
           </footer>
         )}
@@ -169,15 +167,3 @@ export default function RecipeDetails() {
   }
   return null;
 }
-
-/* a chave inProgressRecipes deve conter a seguinte estrutura:
-{
-    drinks: {
-        id-da-bebida: [lista-de-ingredientes-utilizados],
-        ...
-    },
-    meals: {
-        id-da-comida: [lista-de-ingredientes-utilizados],
-        ...
-    }
-} */

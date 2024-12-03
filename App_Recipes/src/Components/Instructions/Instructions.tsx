@@ -8,11 +8,11 @@ export default function Instructions({ instructionsData } : { instructionsData: 
   const { instructions } = instructionsData;
 
   return (
-     <section id="instrucao">
-        <h2>Instructions</h2>
-        <div>
-          <p>{instructions}</p>
-        </div>
-      </section>
+    <section id="instrucao">
+      <h2>Instructions</h2>
+      <div>
+        <p>{instructions}</p>
+      </div>
+    </section>
   );
 }

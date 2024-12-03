@@ -74,16 +74,16 @@ export type DoneRecipe = {
 
 export type InProgressRecipes = {
   drinks: {
-    [id: string]: IngredientsType;
+    [id: string]: string[];
   };
   meals: {
-    [id: string]: IngredientsType;
+    [id: string]: string[];
   };
 };
 
 export type FavoriteRecipe = {
   id: string,
-  type: 'meal' | 'drink',
+  type: 'meals' | 'drinks',
   region?: string,
   category: string,
   alcoholic?: string,

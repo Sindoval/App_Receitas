@@ -7,6 +7,7 @@ import Profile from './Pages/Profile';
 import ContextProviders from './context/ContextProviders';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import RecipeInProgress from './Pages/RecipeInProgress/RecipeInProgress';
+import DoneRecipes from './Pages/DoneRecipes/DoneRecipes';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/drinks/:id" element={<RecipeDetails />} />
         <Route path="/meals/:id/in-progress" element={<RecipeInProgress />} />
         <Route path="/drinks/:id/in-progress" element={<RecipeInProgress />} />
+        <Route path="/done-recipes" element={<DoneRecipes />} />
         <Route path="profile" element={<Profile />} />
       </Routes>
     </ContextProviders>
