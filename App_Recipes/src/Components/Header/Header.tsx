@@ -157,7 +157,7 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
             <div>
               <label htmlFor="name">Name</label>
               <input
-               type="radio"
+                type="radio"
                 name="filter"
                 id="name"
                 value="Name"
