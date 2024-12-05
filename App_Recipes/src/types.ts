@@ -7,12 +7,13 @@ export type DrinksAPIFilter = {
   id: string,
   name: string,
   image: string,
-  category?: string,
+  category: string,
   alcoholic: string,
   glass?: string,
   instructions: string,
   video?: string,
   ingredients: IngredientsType,
+  tags: string[],
 };
 
 export type IngredientsType = [{
@@ -24,11 +25,12 @@ export type MealsAPIFilter = {
   id: string,
   name: string,
   image: string,
-  category?: string,
-  region?: string,
+  category: string,
+  region: string,
   instructions: string,
   video?: string,
   ingredients: IngredientsType,
+  tags: string[],
 };
 
 export type DrinkForIngredientType = {
@@ -63,13 +65,14 @@ export type FilterAPIResponse =
 
 export type DoneRecipe = {
   id: string,
-  type: 'meal' | 'drink',
+  type: 'meals' | 'drinks',
   region: string | '',
-  alcoholicOrNot: 'alcoholic' | 'non-alcoholic' | '',
+  category: string,
+  alcoholicOrNot: string,
   name: string,
   image: string,
   doneDate: string,
-  tags: string | '',
+  tags: string[],
 };
 
 export type InProgressRecipes = {

@@ -122,7 +122,7 @@ export default function RecipeDetails() {
       <div>
         <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meals'}} />
         <main>
-          <Ingredients ingredientsData={{page: 'details',id: recipe.id, ingredients, image, name}}/>
+          <Ingredients ingredientsData={{page: 'details',id: recipe.id, ingredients, image, name}} />
           <Instructions instructionsData={{instructions}} />
 
           {video && (

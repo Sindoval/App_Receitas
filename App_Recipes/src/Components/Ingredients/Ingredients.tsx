@@ -24,17 +24,17 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
   const recipeType = pathname.includes('meals') ? 'meals' : 'drinks';
 
   useEffect(() => {
-  const progressRecipes = localStorage.getItem('inProgressRecipes');
-  if (progressRecipes) {
-    const parsedRecipes: InProgressRecipes = progressRecipes
-    ? JSON.parse(progressRecipes)
-    : { meals: {}, drinks: {} };
-    const savedIngredients = parsedRecipes[recipeType]?.[id] || [];
-    const initialChecked = ingredients.reduce((acc, { ingredient }) => {
-      acc[ingredient] = savedIngredients.includes(ingredient);
-      return acc;
-    }, {} as { [key: string]: boolean });
-    setCheckedIngredients(initialChecked);
+    const progressRecipes = localStorage.getItem('inProgressRecipes');
+    if (progressRecipes) {
+      const parsedRecipes: InProgressRecipes = progressRecipes
+      ? JSON.parse(progressRecipes)
+      : { meals: {}, drinks: {} };
+      const savedIngredients = parsedRecipes[recipeType]?.[id] || [];
+      const initialChecked = ingredients.reduce((acc, { ingredient }) => {
+        acc[ingredient] = savedIngredients.includes(ingredient);
+        return acc;
+      }, {} as { [key: string]: boolean });
+      setCheckedIngredients(initialChecked);
 
     if (!parsedRecipes[recipeType]?.[id]) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
@@ -87,10 +87,8 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
           <ol>
             {ingredients && (
               ingredients.map(({ ingredient, measure }) => (
-                <li
-                  key={ingredient}
-                >
-                    - {ingredient} - {measure}
+                <li key={ingredient}>
+                  - {ingredient} - {measure}
                 </li>
               ))
             )}

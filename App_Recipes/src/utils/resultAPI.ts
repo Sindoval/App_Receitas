@@ -158,6 +158,7 @@ export const fetchCategoriesAPI = async ():Promise<FiltersType> => {
 
 export const formatRecipeDrink = (recipe: any): DrinksAPIFilter => {
   const ingredients = [];
+  const tags:string[] = [];
 
   for (let i = 1; i <= 15; i++) {
     const ingredient = recipe[`strIngredient${i}`];
@@ -171,6 +172,14 @@ export const formatRecipeDrink = (recipe: any): DrinksAPIFilter => {
     }
   }
 
+  if (recipe.strTags) {
+    const arrayTags = recipe.strTags.split(',');
+    const limit = Math.min(2, arrayTags.length);
+    for (let i = 0; i < limit; i++) {
+      tags.push(arrayTags[i]);
+    }
+  }
+
   return {
     id: recipe.idDrink,
     name: recipe.strDrink,
@@ -181,11 +190,13 @@ export const formatRecipeDrink = (recipe: any): DrinksAPIFilter => {
     image: recipe.strDrinkThumb,
     video: recipe.strVideo,
     ingredients: ingredients as IngredientsType,
+    tags,
   };
 };
 
 export const formatRecipeMeal = (recipe: any): MealsAPIFilter => {
   const ingredients = [];
+  const tags:string[] = [];
 
   for (let i = 1; i <= 20; i++) {
     const ingredient = recipe[`strIngredient${i}`];
@@ -199,6 +210,14 @@ export const formatRecipeMeal = (recipe: any): MealsAPIFilter => {
     }
   }
 
+  if (recipe.strTags) {
+    const arrayTags = recipe.strTags.split(',');
+    const limit = Math.min(2, arrayTags.length);
+    for (let i = 0; i < limit; i++) {
+      tags.push(arrayTags[i]);
+    }
+  }
+
   return {
     id: recipe.idMeal,
     name: recipe.strMeal,
@@ -208,6 +227,7 @@ export const formatRecipeMeal = (recipe: any): MealsAPIFilter => {
     image: recipe.strMealThumb,
     video: recipe.strYoutube,
     ingredients: ingredients as IngredientsType,
+    tags,
   };
 };
 
@@ -247,7 +267,7 @@ export const randomRecipes = async (recipe: 'drinks' | 'meals', quantidade: numb
   for (let i = 0; i < quantidade; i += 1) {
     const response = await fetch(url);
     const data = await response.json();
-    const randomRecipe = formatRecipeMeal(data.meals[0]); 
+    const randomRecipe = formatRecipeMeal(data.meals[0]);
     recipes.push(randomRecipe);
   }
   return recipes as MealsAPIFilter[];
