@@ -1,0 +1,15 @@
+#recipes {
+  margin-bottom: 5em;
+  text-align: center;
+}
+
+@media screen and (min-width: 700px) {
+  #recipes {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 auto
+  }
+}

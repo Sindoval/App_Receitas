@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import copy from 'clipboard-copy';
-import Swal from 'sweetalert2';
 import { DrinksAPIFilter, FavoriteRecipe } from '../../types';
 import yellowHeartIcon from '../../images/yellow-heart.png';
 import mealsImage from '../../images/meals.webp';
 import drinksImage from '../../images/drinks.avif';
-import compIcon from '../../images/compartilhar.png';
 import heartIcon from '../../images/heart.png';
+import './HeaderDetails.css';
+import ButtonComp from '../ButtonComp/ButtonComp';
 
 type HeaderDetailsProp = {
   recipeType: 'meals' | 'drinks',
@@ -32,9 +31,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
       const parsedFavorites: FavoriteRecipe[] = JSON.parse(storedFavorites);
       setFavoriteRecipes(parsedFavorites);
 
-      const isFavorited = parsedFavorites.some(
-        (favRecipe) => favRecipe.id === recipe.id
-      );
+      const isFavorited = parsedFavorites.some((favRecipe) => favRecipe.id === recipe.id);
       setFavorite(isFavorited);
     }
     setIsInitialized(true);
@@ -68,23 +65,6 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
     }
   };
 
-  const compButton = () => {
-    const URL = `http://127.0.0.1:5173/${recipeType}/${recipe.id}`;
-    copy(URL)
-      .then(() => {
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Link copied!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   if (recipeType === 'drinks') {
     const { name, alcoholic } = recipe as DrinksAPIFilter;
 
@@ -102,9 +82,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
         }}
       >
         <div id="icons">
-          <button onClick={ compButton }>
-            <img src={compIcon} alt="icon" />
-          </button>
+          <ButtonComp buttonData={{recipeType, id: recipe.id}} />
           {favorite ? (
             <button onClick={ favoriteButton }>
             <img src={yellowHeartIcon} alt="heart icon" />
@@ -139,18 +117,16 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
       }}
     >
       <div id="icons">
-        <button onClick={ compButton }>
-          <img src={compIcon} alt="icon" />
-        </button>
-        {favorite ? (
-          <button onClick={ favoriteButton }>
-            <img src={yellowHeartIcon} alt="heart icon" />
-          </button>
-        ) : (
-          <button onClick={ favoriteButton }>
-            <img src={heartIcon} alt="heart icon" />
-          </button>
-        )}
+        <ButtonComp buttonData={{recipeType, id: recipe.id}} />
+          {favorite ? (
+            <button onClick={ favoriteButton }>
+              <img src={yellowHeartIcon} alt="heart icon" />
+            </button>
+          ) : (
+            <button onClick={ favoriteButton }>
+              <img src={heartIcon} alt="heart icon" />
+            </button>
+          )}
       </div>
       <h1>{name.toUpperCase()}</h1>
       <span>

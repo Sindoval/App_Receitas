@@ -1,0 +1,24 @@
+#filters-done {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 1em 0;
+  color: rgb(112, 110, 110);
+}
+
+.filter {
+  width: 30%;
+}
+
+.filter img {
+  width: 80%;
+}
+
+#filters-done  button{
+  text-decoration: none;
+  background-color: transparent;
+  border: 3px solid #F7CB08;
+  padding: 0.6em;
+  border-radius: 50%;
+}
