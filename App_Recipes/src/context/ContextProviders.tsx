@@ -128,9 +128,9 @@ export default function ContextProviders({
   };
 
   return (
-    <mealsContext.Provider value={mealsValue}>
-      <drinksContext.Provider value={drinksValue}>
-        {children}
+    <mealsContext.Provider value={ mealsValue }>
+      <drinksContext.Provider value={ drinksValue }>
+        { children }
       </drinksContext.Provider>
     </mealsContext.Provider>
   );

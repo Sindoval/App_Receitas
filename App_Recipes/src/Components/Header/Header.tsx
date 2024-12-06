@@ -103,14 +103,14 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
   return (
     <header>
       <div className="top-header">
-        <img src={recipeLogo} alt="" />
+        <img src={ recipeLogo } alt="" />
         <h3>RECIPESapp</h3>
         <div>
           {boolSearch && ( // condicional para os icones
             <button>
               <img
-                onClick={() => setInputSearch(!inputSearch)}
-                src={searchLogo}
+                onClick={ () => setInputSearch(!inputSearch) }
+                src={ searchLogo }
                 alt="search-icon"
               />
             </button>
@@ -118,9 +118,9 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
           {boolProfile && (
             <button>
               <img
-                src={profileLogo}
+                src={ profileLogo }
                 alt="profile-icon"
-                onClick={() => navigate('/profile')}
+                onClick={ () => navigate('/profile') }
               />
             </button>
           )}
@@ -128,7 +128,7 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
       </div>
 
       {title && (
-        <MidHeader midProp={{ title }} />// comp. para o meio do header
+        <MidHeader midProp={ { title } } />// comp. para o meio do header
       )}
 
       {inputSearch && ( // condicional para a pesquisa
@@ -139,7 +139,7 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
               placeholder="Search"
               name="input"
               id="search"
-              onChange={(e) => handleInputSearch(e)}
+              onChange={ (e) => handleInputSearch(e) }
             />
           </div>
 
@@ -151,7 +151,7 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
                 name="filter"
                 id="ingredient"
                 value="Ingredient"
-                onChange={(e) => handleInputSearch(e)}
+                onChange={ (e) => handleInputSearch(e) }
               />
             </div>
             <div>
@@ -161,7 +161,7 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
                 name="filter"
                 id="name"
                 value="Name"
-                onChange={(e) => handleInputSearch(e)}
+                onChange={ (e) => handleInputSearch(e) }
               />
             </div>
             <div>
@@ -171,12 +171,12 @@ export default function Header({ headerData }: { headerData: HeaderProp }) {
                 name="filter"
                 id="first-letter"
                 value="First letter"
-                onChange={(e) => handleInputSearch(e)}
+                onChange={ (e) => handleInputSearch(e) }
               />
             </div>
           </div>
           <button
-            onClick={clickSearch}
+            onClick={ clickSearch }
           >
             SEARCH
           </button>

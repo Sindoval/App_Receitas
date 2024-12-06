@@ -34,19 +34,19 @@ export default function CardRecipe({ cardData }: { cardData: CardRecipeType }) {
   if (recipe === 'DRINK') {
     return (
       <div className="card">
-        <Link to={`/drinks/${id}`}>
-          <img src={image} alt={name} />
+        <Link to={ `/drinks/${ id }` }>
+          <img src={ image } alt={ name } />
         </Link>
-        <span>{name}</span>
+        <span>{ name }</span>
       </div>
     );
   }
   return (
     <div className="card">
-      <Link to={`/meals/${id}`}>
-        <img src={image} alt={name} />
+      <Link to={ `/meals/${id}` }>
+        <img src={ image } alt={ name } />
       </Link>
-      <span>{name}</span>
+      <span>{ name }</span>
     </div>
   );
 }

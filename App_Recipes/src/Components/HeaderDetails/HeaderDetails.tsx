@@ -13,15 +13,15 @@ type HeaderDetailsProp = {
     id: string,
     name: string,
     image: string,
-    category?: string,
+    category: string,
     alcoholic?: string,
     region?: string,
   },
 };
 
-export default function HeaderDetails({headerData} : {headerData: HeaderDetailsProp}) {
+export default function HeaderDetails({ headerData } : { headerData: HeaderDetailsProp }) {
   const [favorite, setFavorite] = useState(false);
-  const {recipe, recipeType} = headerData;
+  const { recipe, recipeType } = headerData;
   const [favoriteRecipes, setFavoriteRecipes] = useState<FavoriteRecipe[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -72,7 +72,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
       <header
         id="header"
         style={{
-          backgroundImage: `url(${drinksImage})`,
+          backgroundImage: `url(${ drinksImage })`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -82,20 +82,20 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
         }}
       >
         <div id="icons">
-          <ButtonComp buttonData={{recipeType, id: recipe.id}} />
-          {favorite ? (
+          <ButtonComp buttonData={ { recipeType, id: recipe.id } } />
+          { favorite ? (
             <button onClick={ favoriteButton }>
-            <img src={yellowHeartIcon} alt="heart icon" />
+              <img src={ yellowHeartIcon } alt="heart icon" />
             </button>
           ) : (
             <button onClick={ favoriteButton }>
-            <img src={heartIcon} alt="heart icon" />
+              <img src={ heartIcon } alt="heart icon" />
             </button>
-          )}
+          ) }
         </div>
-        <h1>{name.toUpperCase()}</h1>
+        <h1>{ name.toUpperCase() }</h1>
         <span>
-          ({alcoholic})
+          ({ alcoholic })
         </span>
       </header>
     );
@@ -107,7 +107,7 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
     <header
       id="header"
       style={{
-        backgroundImage: `url(${mealsImage})`,
+        backgroundImage: `url(${ mealsImage })`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -117,20 +117,20 @@ export default function HeaderDetails({headerData} : {headerData: HeaderDetailsP
       }}
     >
       <div id="icons">
-        <ButtonComp buttonData={{recipeType, id: recipe.id}} />
-          {favorite ? (
-            <button onClick={ favoriteButton }>
-              <img src={yellowHeartIcon} alt="heart icon" />
-            </button>
-          ) : (
-            <button onClick={ favoriteButton }>
-              <img src={heartIcon} alt="heart icon" />
-            </button>
-          )}
+      <ButtonComp buttonData={ { recipeType, id: recipe.id } } />
+        {favorite ? (
+          <button onClick={ favoriteButton }>
+            <img src={ yellowHeartIcon } alt="heart icon" />
+          </button>
+        ) : (
+          <button onClick={ favoriteButton }>
+            <img src={ heartIcon } alt="heart icon" />
+          </button>
+        )}
       </div>
-      <h1>{name.toUpperCase()}</h1>
+      <h1>{ name.toUpperCase() }</h1>
       <span>
-          ({region})
+          ({ region })
       </span>
     </header>
   );

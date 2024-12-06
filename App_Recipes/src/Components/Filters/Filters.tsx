@@ -20,17 +20,17 @@ export default function Filters({ filterData }: { filterData: FilterProp }) {
     return (
       <div className="filters">
         <div className="filter">
-          <button onClick={() => filterRecipe('drink', 'all')}>
-            <img src={drinkIcon} alt="drink-icon" />
+          <button onClick={ () => filterRecipe('drink', 'all') }>
+            <img src={ drinkIcon } alt="drink-icon" />
           </button>
           <span>All</span>
         </div>
         {drinkFilters.map((filter) => (
-          <div className="filter" key={filter}>
-            <button onClick={() => filterRecipe('drink', filter)}>
-              <img src={drinkFilterIcon} alt="" />
+          <div className="filter" key={ filter }>
+            <button onClick={ () => filterRecipe('drink', filter) }>
+              <img src={ drinkFilterIcon } alt="" />
             </button>
-            <span>{filter}</span>
+            <span>{ filter }</span>
           </div>
         ))}
       </div>
@@ -39,17 +39,17 @@ export default function Filters({ filterData }: { filterData: FilterProp }) {
   return (
     <div className="filters">
       <div className="filter" key="all">
-        <button onClick={() => filterRecipe('meal', 'all')}>
-          <img src={mealIcon} alt="meal-icon" />
+        <button onClick={ () => filterRecipe('meal', 'all') }>
+          <img src={ mealIcon } alt="meal-icon" />
         </button>
         <span>All</span>
       </div>
       {mealFilters.map((filter) => (
-        <div className="filter" key={filter}>
-          <button onClick={() => filterRecipe('meal', filter)}>
-            <img src={mealFilterIcon} alt="" />
+        <div className="filter" key={ filter }>
+          <button onClick={ () => filterRecipe('meal', filter) }>
+            <img src={ mealFilterIcon } alt="" />
           </button>
-          <span>{filter}</span>
+          <span>{ filter }</span>
         </div>
       ))}
     </div>

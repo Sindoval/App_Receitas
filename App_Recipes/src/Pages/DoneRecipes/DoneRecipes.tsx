@@ -4,7 +4,7 @@ import Footer from '../../Components/Footer/Footer';
 import { DoneRecipe } from '../../types';
 import CardDoneRecipe from '../../Components/CardDoneRecipe/CardDoneRecipe';
 import './DoneRecipes.css';
-import FiltersDone from '../../Components/FiltersDone/FiltersDone';
+import { FiltersDone } from '../../Components/FiltersDone/FiltersDone';
 
 export default function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState<DoneRecipe[]>([]);
@@ -26,12 +26,12 @@ export default function DoneRecipes() {
 
   return (
     <div>
-      <Header headerData={{title: 'DONE RECIPES', boolProfile: true, boolSearch: false}} />
-      <FiltersDone filterData={{recipes: doneRecipes, allRecipes, updateRecipes}} />
+      <Header headerData={{ title: 'DONE RECIPES', boolProfile: true, boolSearch: false }} />
+      <FiltersDone filterData={{ recipes: doneRecipes, allRecipes, updateRecipes }} />
       <main id="recipes">
-        {doneRecipes.map(({id, image, name, region, alcoholicOrNot, category, tags, type, doneDate }) => (
+        {doneRecipes.map(({ id, image, name, region, alcoholicOrNot, category, tags, type, doneDate }) => (
           <CardDoneRecipe
-            key={id}
+            key={ id }
             cardDoneData={{
               page: 'done-recipes',
               id,

@@ -8,12 +8,12 @@ export default function Footer() {
 
   return (
     <div className="footer">
-      <button onClick={() => navigate('/meals')}>
-        <img src={mealIcon} alt="meal-icon" />
+      <button onClick={ () => navigate('/meals') }>
+        <img src={ mealIcon } alt="meal-icon" />
       </button>
 
-      <button onClick={() => navigate('/drinks')}>
-        <img src={drinkIcon} alt="drink-icon" />
+      <button onClick={ () => navigate('/drinks') }>
+        <img src={ drinkIcon } alt="drink-icon" />
       </button>
     </div>
   );

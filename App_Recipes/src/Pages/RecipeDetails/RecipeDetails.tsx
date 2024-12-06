@@ -72,15 +72,15 @@ export default function RecipeDetails() {
     } = recipe as DrinksAPIFilter;
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks'}} />
+        <HeaderDetails headerData={ { recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks' } } />
         <main>
-          <Ingredients ingredientsData={{page: 'details', id: recipe.id, ingredients, image, name}} />
-          <Instructions instructionsData={{instructions}} />
+          <Ingredients ingredientsData={ { page: 'details', id: recipe.id, ingredients, image, name } } />
+          <Instructions instructionsData={ { instructions } } />
           {video && (
             <section id="video">
               <h2>Vídeo</h2>
               <iframe
-                src={getYouTubeEmbedUrl(video)}
+                src={ getYouTubeEmbedUrl(video) }
                 width="560"
                 height="315"
                 allowFullScreen
@@ -92,7 +92,7 @@ export default function RecipeDetails() {
             <div id="random">
               {random.map((randomRecipe) => (
                 <CardRecipe
-                  key={randomRecipe.id}
+                  key={ randomRecipe.id }
                   cardData={{
                     recipe: 'DRINK',
                     id: randomRecipe.id,
@@ -107,9 +107,9 @@ export default function RecipeDetails() {
         {!recipeVerify && (
           <footer>
             {!inProgressDrink ? (
-              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>START RECIPE</button>
+              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>START RECIPE</button>
             ) : (
-              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>CONTINUE RECIPE</button>
+              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>CONTINUE RECIPE</button>
             )}
           </footer>
         )}
@@ -117,18 +117,18 @@ export default function RecipeDetails() {
     );
   }
   if (recipe && recipeType === 'meals') {
-    const { name, image, instructions, ingredients, video, region} = recipe as MealsAPIFilter;
+    const { name, image, instructions, ingredients, video, region, category} = recipe as MealsAPIFilter;
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meals'}} />
+        <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, region, category }, recipeType: 'meals' } } />
         <main>
-          <Ingredients ingredientsData={{page: 'details',id: recipe.id, ingredients, image, name}} />
-          <Instructions instructionsData={{instructions}} />
+          <Ingredients ingredientsData={ { page: 'details',id: recipe.id, ingredients, image, name } } />
+          <Instructions instructionsData={ { instructions } } />
 
           {video && (
             <section id="video">
-              <iframe
-                src={getYouTubeEmbedUrl(video)}
+              <iframe 
+                src={ getYouTubeEmbedUrl(video) }
                 width="560"
                 height="315"
                 allowFullScreen
@@ -141,7 +141,7 @@ export default function RecipeDetails() {
             <div id="random">
               {random.map((randomRecipe) => (
                 <CardRecipe
-                  key={randomRecipe.id}
+                  key={ randomRecipe.id }
                   cardData={{
                     recipe: 'MEAL',
                     id: randomRecipe.id,
@@ -156,9 +156,9 @@ export default function RecipeDetails() {
         {!recipeVerify && (
           <footer>
             {!inProgressMeal ? (
-              <button onClick={() => navigate(`/meals/${id}/in-progress`)}>START RECIPE</button>
+              <button onClick={ () => navigate(`/meals/${ id }/in-progress`) }>START RECIPE</button>
             ) : (
-              <button onClick={() => navigate(`/drinks/${id}/in-progress`)}>CONTINUE RECIPE</button>
+              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>CONTINUE RECIPE</button>
             )}
           </footer>
         )}
