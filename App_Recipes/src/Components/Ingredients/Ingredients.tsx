@@ -72,7 +72,7 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
     }
   }, [checkedIngredients, ingredientsData]);
 
-  const handleCheckboxChange = (ingredient: string) => {
+  const handleCheckboxChange = (ingredient: string) => { 
     setCheckedIngredients((prev) => ({
       ...prev,
       [ingredient]: !prev[ingredient],
@@ -87,14 +87,14 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
           <ol>
             {ingredients && (
               ingredients.map(({ ingredient, measure }) => (
-                <li key={ingredient}>
-                  - {ingredient} - {measure}
+                <li key={ ingredient }>
+                  - { ingredient } - { measure }
                 </li>
               ))
             )}
           </ol>
         </div>
-        <img src={image} alt={name} />
+        <img src={ image } alt={ name } />
       </section>
     );
   }
@@ -106,22 +106,22 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
           {ingredients && (
             ingredients.map(({ ingredient, measure }, index) => (
               <li
-                key={index}
+                key={ index }
               >
                 <input
                   type="checkbox"
                   name=""
-                  id={ingredient}
-                  checked={checkedIngredients[ingredient] || false}
-                  onChange={() => handleCheckboxChange(ingredient) }
+                  id={ ingredient }
+                  checked={ checkedIngredients[ingredient] || false }
+                  onChange={ () => handleCheckboxChange(ingredient) }
                 />
-                <label htmlFor={ingredient}>{`${ingredient} - ${measure}`}</label>
+                <label htmlFor={ ingredient }>{ `${ ingredient } - ${ measure }` }</label>
               </li>
             ))
           )}
         </ol>
       </div>
-      <img src={image} alt={name} />
+      <img src={ image } alt={ name } />
     </section>
   );
 }

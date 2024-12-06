@@ -45,3 +45,33 @@
   text-decoration: none;
   color: black;
 }
+
+#info-fav {
+  min-width: 50%;
+  max-width: 41%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  margin-left: 1em;
+}
+
+#info-fav p {
+  margin: 0.5em;
+}
+
+#info-fav a {
+  text-decoration: none;
+  color: black;
+}
+
+#buttons {
+  justify-content: center;
+  display: flex;
+  gap: 2em;
+}
+
+#buttons button {
+  text-decoration: none;
+  background-color: transparent;
+}

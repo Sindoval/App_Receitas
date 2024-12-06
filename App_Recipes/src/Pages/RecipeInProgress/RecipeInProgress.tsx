@@ -75,14 +75,14 @@ export default function RecipeInProgress() {
 
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks'}} />
+        <HeaderDetails headerData={ { recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks' } } />
         <main>
-          <Ingredients ingredientsData={{page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked}} />
-          <Instructions instructionsData={{instructions}} />
+          <Ingredients ingredientsData={ { page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
+          <Instructions instructionsData={ { instructions } } />
         </main>
         {allChecked && (
           <footer>
-            <button onClick={finishRecipeButton}>FINISH RECIPE</button>
+            <button onClick={ finishRecipeButton }>FINISH RECIPE</button>
           </footer>
         )}
       </div>
@@ -95,18 +95,19 @@ export default function RecipeInProgress() {
       instructions,
       ingredients,
       region,
+      category,
     } = recipe as MealsAPIFilter;
 
     return (
       <div>
-        <HeaderDetails headerData={{recipe: {id: recipe.id, name, image, region}, recipeType: 'meals'}} />
+        <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, region, category }, recipeType: 'meals' } } />
         <main>
-          <Ingredients ingredientsData={{page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked}} />
-          <Instructions instructionsData={{instructions}} />
+          <Ingredients ingredientsData={ { page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
+          <Instructions instructionsData={ { instructions } } />
         </main>
         {allChecked && (
           <footer>
-            <button onClick={finishRecipeButton}>FINISH RECIPE</button>
+            <button onClick={ finishRecipeButton }>FINISH RECIPE</button>
           </footer>
         )}
       </div>

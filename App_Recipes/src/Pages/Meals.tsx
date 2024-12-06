@@ -17,14 +17,14 @@ export default function Meals() {
   return (
     <div>
       <Header
-        headerData={{ title: 'MEALS', boolProfile: true, boolSearch: true }}
+        headerData={ { title: 'MEALS', boolProfile: true, boolSearch: true } }
       />
       <Filters filterData={{ recipe: 'meal' }} />
       <div className="cards">
         {listMeals.map((meal) => (
           <CardRecipe
-            key={meal.id}
-            cardData={{
+            key={ meal.id }
+            cardData={ {
               recipe: 'MEAL',
               id: meal.id,
               name: meal.name,
@@ -34,7 +34,7 @@ export default function Meals() {
               image: meal.image,
               video: meal.video,
               ingredients: meal.ingredients,
-            }}
+            } }
           />
         ))}
       </div>
