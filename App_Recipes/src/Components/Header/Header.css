@@ -37,8 +37,8 @@ header {
   box-sizing: border-box;
   text-align: center;
   margin-top: 1em;
-  background-color: rgba(79, 9, 112, 0.836);
-  color: rgb(238, 235, 235);
+  background-color: rgba(247, 203, 8);
+  color: rgb(53, 49, 49);
 }
 
 #search {
@@ -60,7 +60,7 @@ header {
   border-radius: 4px;
   font-weight: bolder;
   margin-bottom: 1em;
-  background-color: rgb(201, 201, 201);
+  background-color: rgb(255, 255, 255);
   color: black
 }
 

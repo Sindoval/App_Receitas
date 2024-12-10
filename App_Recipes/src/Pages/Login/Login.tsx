@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logoIcon from '../../images/livro-de-receitas.png';
+import './Login.css';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -33,14 +35,20 @@ export default function Login() {
   };
 
   const buttonClick = () => {
-    localStorage.setItem('user', `{ email: ${email} }`);
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
     navigate('/meals');
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
+    <div id="login">
+      <header>
+        <h1>RECIPES app</h1>
+      </header>
+      <div id="logo">
+        <img src={ logoIcon } alt="livro de receitas" />
+      </div>
+      <h2>Login</h2>
+      <div id="inputs">
         <input
           type="text"
           placeholder="Email"

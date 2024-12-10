@@ -27,29 +27,19 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
     const progressRecipes = localStorage.getItem('inProgressRecipes');
     if (progressRecipes) {
       const parsedRecipes: InProgressRecipes = progressRecipes
-      ? JSON.parse(progressRecipes)
-      : { meals: {}, drinks: {} };
+        ? JSON.parse(progressRecipes)
+        : { meals: {}, drinks: {} };
       const savedIngredients = parsedRecipes[recipeType]?.[id] || [];
       const initialChecked = ingredients.reduce((acc, { ingredient }) => {
         acc[ingredient] = savedIngredients.includes(ingredient);
         return acc;
       }, {} as { [key: string]: boolean });
       setCheckedIngredients(initialChecked);
-
-    if (!parsedRecipes[recipeType]?.[id]) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({
-        ...parsedRecipes,
-        [recipeType]: {
-          ...parsedRecipes[recipeType],
-          [id]: savedIngredients,
-        },
-      }));
     }
-  }
-  setIsInitialized(true);
+    setIsInitialized(true);
   }, [id, recipeType, ingredients]);
 
-  useEffect(() => {
+  useEffect(() => { // useEffect responsável por atualizar o localstorage com os inputs marcados
     if (isInitialized) {
       const storage: InProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes') || '{}');
       const updatedStorage = {
@@ -72,7 +62,7 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
     }
   }, [checkedIngredients, ingredientsData]);
 
-  const handleCheckboxChange = (ingredient: string) => { 
+  const handleCheckboxChange = (ingredient: string) => {
     setCheckedIngredients((prev) => ({
       ...prev,
       [ingredient]: !prev[ingredient],
@@ -115,7 +105,7 @@ export default function Ingredients({ ingredientsData } : { ingredientsData: Ing
                   checked={ checkedIngredients[ingredient] || false }
                   onChange={ () => handleCheckboxChange(ingredient) }
                 />
-                <label htmlFor={ ingredient }>{ `${ ingredient } - ${ measure }` }</label>
+                <label htmlFor={ ingredient }>{ `${ingredient} - ${measure}` }</label>
               </li>
             ))
           )}

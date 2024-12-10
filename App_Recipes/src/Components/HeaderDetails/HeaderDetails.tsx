@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DrinksAPIFilter, FavoriteRecipe } from '../../types';
-import yellowHeartIcon from '../../images/yellow-heart.png';
+import yellowHeartIcon from '../../images/gostar.png';
 import mealsImage from '../../images/meals.webp';
 import drinksImage from '../../images/drinks.avif';
 import heartIcon from '../../images/heart.png';
@@ -71,15 +71,15 @@ export default function HeaderDetails({ headerData } : { headerData: HeaderDetai
     return (
       <header
         id="header"
-        style={{
-          backgroundImage: `url(${ drinksImage })`,
+        style={ {
+          backgroundImage: `url(${drinksImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           height: '40vh', // ajuste a altura conforme necessário
           width: '100%',
           color: 'white', // cor do texto sobre o background
-        }}
+        } }
       >
         <div id="icons">
           <ButtonComp buttonData={ { recipeType, id: recipe.id } } />
@@ -106,18 +106,18 @@ export default function HeaderDetails({ headerData } : { headerData: HeaderDetai
   return (
     <header
       id="header"
-      style={{
-        backgroundImage: `url(${ mealsImage })`,
+      style={ {
+        backgroundImage: `url(${mealsImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         height: '40vh', // ajuste a altura conforme necessário
         width: '100%',
         color: 'white', // cor do texto sobre o background
-      }}
+      } }
     >
       <div id="icons">
-      <ButtonComp buttonData={ { recipeType, id: recipe.id } } />
+        <ButtonComp buttonData={ { recipeType, id: recipe.id } } />
         {favorite ? (
           <button onClick={ favoriteButton }>
             <img src={ yellowHeartIcon } alt="heart icon" />
@@ -130,7 +130,7 @@ export default function HeaderDetails({ headerData } : { headerData: HeaderDetai
       </div>
       <h1>{ name.toUpperCase() }</h1>
       <span>
-          ({ region })
+        ({ region })
       </span>
     </header>
   );

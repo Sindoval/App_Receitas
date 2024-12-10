@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FavoriteRecipe } from '../../types';
 import ButtonComp from '../ButtonComp/ButtonComp';
-import heartIcon from '../../images/yellow-heart.png';
+import heartIcon from '../../images/gostar.png';
 import './CardDoneRecipe.css';
 
 type DoneRecipeProp = {
@@ -39,7 +39,7 @@ export default function CardDoneRecipe({ cardDoneData } : { cardDoneData: DoneRe
             <img src={ image } alt={ name } />
           </Link>
 
-        </div>
+      </div>
 
         <section id="info">
 
@@ -48,15 +48,15 @@ export default function CardDoneRecipe({ cardDoneData } : { cardDoneData: DoneRe
               <h3>{ name }</h3>
             </Link>
             { type === 'drinks' ? (
-              <span>{`${ alcoholic } - ${ category }`}</span>
+              <span>{`${alcoholic} - ${category}`}</span>
             ) : (
-              <span>{`${ region } - ${ category }`}</span>
+              <span>{`${region} - ${category}`}</span>
             )}
           </div>
 
           <div id="date-tag">
             <div>
-              <p>{ `Done in: ${ date }` }</p>
+              <p>{ `Done in: ${date}` }</p>
             </div>
             <div>
               {tags?.map((tag) => (
@@ -66,13 +66,13 @@ export default function CardDoneRecipe({ cardDoneData } : { cardDoneData: DoneRe
           </div>
 
         </section>
-        <ButtonComp buttonData={{ recipeType: type, id }} />
+        <ButtonComp buttonData={ { recipeType: type, id } } />
       </div>
-      );
+    );
   }
   if (favorite) {
     return (
-    <div id="card-done">
+      <div id="card-done">
 
         <div id="image">
       	  <Link to={ `http://127.0.0.1:5173/${type}/${id}` }>
@@ -88,14 +88,14 @@ export default function CardDoneRecipe({ cardDoneData } : { cardDoneData: DoneRe
               <h3>{ name }</h3>
             </Link>
             { type === 'drinks' ? (
-              <span>{`${ alcoholic } - ${ category }`}</span>
+              <span>{`${alcoholic} - ${category}`}</span>
             ) : (
-              <span>{`${ region } - ${ category }`}</span>
+              <span>{`${region} - ${category}`}</span>
             )}
           </div>
-            
+
           <div id="buttons">
-            <ButtonComp buttonData={{ recipeType: type, id }} />
+            <ButtonComp buttonData={ { recipeType: type, id } } />
             <button onClick={ favButton }>
               <img src={ heartIcon } alt="heart-icon" />
             </button>
@@ -103,7 +103,7 @@ export default function CardDoneRecipe({ cardDoneData } : { cardDoneData: DoneRe
 
         </section>
       </div>
-    );  
+    );
   }
   return null;
 }

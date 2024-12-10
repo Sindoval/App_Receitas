@@ -93,3 +93,7 @@ export type InProgressRecipes = {
     [id: string]: string[];
   };
 };
+
+export type User = {
+  email: string,
+};
