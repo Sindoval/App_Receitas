@@ -26,13 +26,13 @@ export default function DoneRecipes() {
 
   return (
     <div>
-      <Header headerData={{ title: 'DONE RECIPES', boolProfile: true, boolSearch: false }} />
-      <FiltersDone filterData={{ recipes: doneRecipes, allRecipes, updateRecipes }} />
+      <Header headerData={ { title: 'DONE RECIPES', boolProfile: true, boolSearch: false } } />
+      <FiltersDone filterData={ { recipes: doneRecipes, allRecipes, updateRecipes } } />
       <main id="recipes">
         {doneRecipes.map(({ id, image, name, region, alcoholicOrNot, category, tags, type, doneDate }) => (
           <CardDoneRecipe
             key={ id }
-            cardDoneData={{
+            cardDoneData={ {
               page: 'done-recipes',
               id,
               image,
@@ -43,7 +43,7 @@ export default function DoneRecipes() {
               tags,
               type,
               date: doneDate,
-            }}
+            } }
           />
         ))}
       </main>

@@ -19,7 +19,7 @@ export default function Meals() {
       <Header
         headerData={ { title: 'MEALS', boolProfile: true, boolSearch: true } }
       />
-      <Filters filterData={{ recipe: 'meal' }} />
+      <Filters filterData={ { recipe: 'meal' } } />
       <div className="cards">
         {listMeals.map((meal) => (
           <CardRecipe

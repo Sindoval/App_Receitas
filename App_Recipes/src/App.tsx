@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
-import Login from './Pages/Login';
+import Login from './Pages/Login/Login';
 import './App.css';
 import Meals from './Pages/Meals';
 import Drinks from './Pages/Drinks/Drinks';
-import Profile from './Pages/Profile';
+import Profile from './Pages/Profile/Profile';
 import ContextProviders from './context/ContextProviders';
 import RecipeDetails from './Pages/RecipeDetails/RecipeDetails';
 import RecipeInProgress from './Pages/RecipeInProgress/RecipeInProgress';
@@ -22,8 +22,8 @@ export default function App() {
         <Route path="/meals/:id/in-progress" element={ <RecipeInProgress /> } />
         <Route path="/drinks/:id/in-progress" element={ <RecipeInProgress /> } />
         <Route path="/done-recipes" element={ <DoneRecipes /> } />
-        <Route path="favorite-recipes" element={ <FavoriteRecipes /> } />
-        <Route path="profile" element={ <Profile /> } />
+        <Route path="/favorite-recipes" element={ <FavoriteRecipes /> } />
+        <Route path="/profile" element={ <Profile /> } />
       </Routes>
     </ContextProviders>
   );

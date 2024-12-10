@@ -8,18 +8,17 @@ import CardRecipe from '../../Components/CardRecipe/CardRecipe';
 import Ingredients from '../../Components/Ingredients/Ingredients';
 import Instructions from '../../Components/Instructions/Instructions';
 import HeaderDetails from '../../Components/HeaderDetails/HeaderDetails';
+import FooterButton from '../../Components/FooterButton/FooterButton';
 
 export default function RecipeDetails() {
   const [recipe, setRecipe] = useState<MealsAPIFilter | DrinksAPIFilter>();
   const [random, setRandom] = useState<MealsAPIFilter[] | DrinksAPIFilter[]>([]);
   const [recipeVerify, setRecipeVerify] = useState(false);
-  const [inProgressDrink, setInProgressDrink] = useState(false);
-  const [inProgressMeal, setInProgressMeal] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
 
   const { id } = useParams();
   const { pathname } = window.location;
   const recipeType = pathname.includes('meals') ? 'meals' : 'drinks';
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -45,12 +44,12 @@ export default function RecipeDetails() {
         setRecipeVerify(verify);
       }
 
-      if (progressRecipes) {
+      if (progressRecipes && id) {
         const storageProgress: InProgressRecipes = JSON.parse(progressRecipes);
-        const verifyDrink = storageProgress.drinks && Object.keys(storageProgress.drinks).some((v) => v === id);
-        const verifyMeal = storageProgress.meals && Object.keys(storageProgress.meals).some((v) => v === id);
-        setInProgressDrink(verifyDrink);
-        setInProgressMeal(verifyMeal);
+        if (storageProgress[recipeType]?.[id]) {
+          const verifyRecipe = storageProgress[recipeType] && storageProgress[recipeType][id].length > 0;
+          setInProgress(verifyRecipe);
+        }
       }
     };
 
@@ -72,7 +71,7 @@ export default function RecipeDetails() {
     } = recipe as DrinksAPIFilter;
     return (
       <div>
-        <HeaderDetails headerData={ { recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks' } } />
+        <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, alcoholic, category }, recipeType: 'drinks' } } />
         <main>
           <Ingredients ingredientsData={ { page: 'details', id: recipe.id, ingredients, image, name } } />
           <Instructions instructionsData={ { instructions } } />
@@ -93,41 +92,33 @@ export default function RecipeDetails() {
               {random.map((randomRecipe) => (
                 <CardRecipe
                   key={ randomRecipe.id }
-                  cardData={{
+                  cardData={ {
                     recipe: 'DRINK',
                     id: randomRecipe.id,
                     name: randomRecipe.name,
                     image: randomRecipe.image,
-                  }}
+                  } }
                 />
               ))}
             </div>
           </section>
         </main>
-        {!recipeVerify && (
-          <footer>
-            {!inProgressDrink ? (
-              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>START RECIPE</button>
-            ) : (
-              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>CONTINUE RECIPE</button>
-            )}
-          </footer>
-        )}
+        <FooterButton buttonData={ { type: recipeType, id, done: recipeVerify, inProgress } } />
       </div>
     );
   }
   if (recipe && recipeType === 'meals') {
-    const { name, image, instructions, ingredients, video, region, category} = recipe as MealsAPIFilter;
+    const { name, image, instructions, ingredients, video, region, category } = recipe as MealsAPIFilter;
     return (
       <div>
         <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, region, category }, recipeType: 'meals' } } />
         <main>
-          <Ingredients ingredientsData={ { page: 'details',id: recipe.id, ingredients, image, name } } />
+          <Ingredients ingredientsData={ { page: 'details', id: recipe.id, ingredients, image, name } } />
           <Instructions instructionsData={ { instructions } } />
 
           {video && (
             <section id="video">
-              <iframe 
+              <iframe
                 src={ getYouTubeEmbedUrl(video) }
                 width="560"
                 height="315"
@@ -142,26 +133,18 @@ export default function RecipeDetails() {
               {random.map((randomRecipe) => (
                 <CardRecipe
                   key={ randomRecipe.id }
-                  cardData={{
+                  cardData={ {
                     recipe: 'MEAL',
                     id: randomRecipe.id,
                     name: randomRecipe.name,
                     image: randomRecipe.image,
-                  }}
+                  } }
                 />
               ))}
             </div>
           </section>
         </main>
-        {!recipeVerify && (
-          <footer>
-            {!inProgressMeal ? (
-              <button onClick={ () => navigate(`/meals/${ id }/in-progress`) }>START RECIPE</button>
-            ) : (
-              <button onClick={ () => navigate(`/drinks/${ id }/in-progress`) }>CONTINUE RECIPE</button>
-            )}
-          </footer>
-        )}
+        <FooterButton buttonData={ { type: recipeType, id, done: recipeVerify, inProgress } } />
       </div>
     );
   }

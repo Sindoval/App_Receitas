@@ -6,6 +6,7 @@ import {
   IngredientsType,
   MealsAPIFilter,
 } from '../types';
+import { stringFilter } from './stringFilter';
 
 export const fetchDrinkByName = async (filter:'name' | 'first', input: string) => {
   const url = filter === 'name'
@@ -154,6 +155,39 @@ export const fetchCategoriesAPI = async ():Promise<FiltersType> => {
   }
 
   return filters;
+};
+
+export const fetchRecipeByCategory = async (recipe: 'drinks' | 'meals', category: string) => {
+  const filterUnderscored = stringFilter(category);
+  const url = recipe === 'drinks'
+    ? `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterUnderscored}`
+    : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterUnderscored}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  const allRecipes = [];
+
+  if (recipe === 'drinks') {
+    const max = Math.min(12, data.drinks.length);
+    for (let i = 0; i < max; i += 1) {
+      const recipe = {
+        id: data.drinks[i].idDrink,
+        name: data.drinks[i].strDrink,
+        image: data.drinks[i].strDrinkThumb,
+      };
+      allRecipes.push(recipe);
+    }
+    return allRecipes;
+  }
+  const max = Math.min(12, data.meals.length);
+  for (let i = 0; i < max; i += 1) {
+    const recipe = {
+      id: data.meals[i].idMeal,
+      name: data.meals[i].strMeal,
+      image: data.meals[i].strMealThumb,
+    };
+    allRecipes.push(recipe);
+  }
+  return allRecipes;
 };
 
 export const formatRecipeDrink = (recipe: any): DrinksAPIFilter => {

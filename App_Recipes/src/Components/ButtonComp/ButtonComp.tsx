@@ -7,7 +7,7 @@ type ButtonCompProp = {
   id: string,
 };
 
-export default function ButtonComp({buttonData} : {buttonData: ButtonCompProp}) {
+export default function ButtonComp({ buttonData } : { buttonData: ButtonCompProp }) {
   const { recipeType, id } = buttonData;
 
   const compButton = () => {
@@ -29,13 +29,13 @@ export default function ButtonComp({buttonData} : {buttonData: ButtonCompProp}) 
 
   return (
     <button
-      onClick={compButton}
-      style={{
+      onClick={ compButton }
+      style={ {
         textDecoration: 'none',
         backgroundColor: 'transparent',
-      }}
+      } }
     >
-      <img src={compIcon} alt="icon" />
+      <img src={ compIcon } alt="icon" />
     </button>
   );
 }

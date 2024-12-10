@@ -7,7 +7,7 @@ type DrinksContextType = {
   newRandomRecipes: (recipe: 'drinks' | 'meals', recipes: DrinksAPIFilter[]) => void,
   newRecipes: (recipe: 'drinks' | 'meals', recipes: DrinksAPIFilter[]) => void,
   drinkFilters: string[],
-  filterRecipe: (recipe: 'drink' | 'meal', filter: string) => void,
+  filterRecipe: (recipe: 'drinks' | 'meals', filter: string) => void,
 };
 
 const drinksContext = createContext({} as DrinksContextType);

@@ -16,7 +16,7 @@ type FiltersFavProp = {
   updateRecipes: (recipes: FavoriteRecipe[]) => void,
 };
 
-export function FiltersDone({filterData} : {filterData: FiltersDoneProp}) {
+export function FiltersDone({ filterData } : { filterData: FiltersDoneProp }) {
   const { allRecipes, updateRecipes } = filterData;
 
   const filterRecipes = (filter: 'all' | 'meals' | 'drinks') => {
@@ -56,7 +56,7 @@ export function FiltersDone({filterData} : {filterData: FiltersDoneProp}) {
   );
 }
 
-export function FilterFavorites({filterData} : {filterData: FiltersFavProp}) {
+export function FilterFavorites({ filterData } : { filterData: FiltersFavProp }) {
   const { allRecipes, updateRecipes } = filterData;
 
   const filterRecipes = (filter: 'all' | 'meals' | 'drinks') => {

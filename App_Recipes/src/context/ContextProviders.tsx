@@ -2,8 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import mealsContext from './mealsContext';
 import drinksContext from './drinksContext';
 import { DrinksAPIFilter, FiltersType, MealsAPIFilter } from '../types';
-import { fetchCategoriesAPI, randomRecipes } from '../utils/resultAPI';
-import { stringFilter } from '../utils/stringFilter';
+import { fetchCategoriesAPI, fetchRecipeByCategory, randomRecipes } from '../utils/resultAPI';
 
 export default function ContextProviders({
   children,
@@ -24,12 +23,12 @@ export default function ContextProviders({
     const initialRecipes = async () => {
       if (randomDrinks.length === 0 && randomMeals.length === 0) {
         const drinkRecipes = await randomRecipes('drinks', 12);
-        setRandomDrinks(drinkRecipes);
-        setListDrinks(drinkRecipes);
+        setRandomDrinks(drinkRecipes as DrinksAPIFilter[]);
+        setListDrinks(drinkRecipes as DrinksAPIFilter[]);
 
         const mealRecipes = await randomRecipes('meals', 12);
-        setRandomMeals(mealRecipes);
-        setListMeals(mealRecipes);
+        setRandomMeals(mealRecipes as MealsAPIFilter[]);
+        setListMeals(mealRecipes as MealsAPIFilter[]);
       }
     };
     initialRecipes();
@@ -46,68 +45,37 @@ export default function ContextProviders({
 
   const newRandomRecipes = (recipe: 'drinks' | 'meals', recipes: DrinksAPIFilter[] | MealsAPIFilter[]) => {
     if (recipe === 'drinks') {
-      setRandomDrinks(recipes);
+      setRandomDrinks(recipes as DrinksAPIFilter[]);
     } else {
-      setRandomMeals(recipes);
+      setRandomMeals(recipes as MealsAPIFilter[]);
     }
   };
 
-  // Falta implementar o req 22. "toggle" nos botoes de filtro
-  // Refatorar vvvv
-  const filterRecipe = async (recipe: 'drink' | 'meal', filter: string) => {
-    const filterUnderscored = stringFilter(filter);
-    const url = recipe === 'drink'
-      ? `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterUnderscored}`
-      : `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterUnderscored}`;
+  const filterRecipe = async (recipe: 'drinks' | 'meals', filter: string) => {
+    const isDrink = recipe === 'drinks';
 
     if (filter === 'all') {
-      if (recipe === 'drink') {
-        if (randomDrinks.length > 0) {
-          newRecipes('drinks', randomDrinks);
-        } else {
-          const listRandomDrinks = await randomRecipes('drinks', 12);
-          newRandomRecipes('drinks', listRandomDrinks);
-          newRecipes('drinks', listRandomDrinks);
-        }
+      const randomRecipesList = isDrink ? randomDrinks : randomMeals;
+
+      if (randomRecipesList.length > 0) {
+        newRecipes(recipe, randomRecipesList);
       } else {
-        if (randomMeals.length > 0) {
-          newRecipes('meals', randomMeals);
-        } else {
-          const listRandomMeals = await randomRecipes('meals', 12);
-          newRandomRecipes('meals', listRandomMeals);
-          newRecipes('meals', listRandomMeals);
-        }
+        const listRandomRecipes = await randomRecipes(recipe, 12);
+        newRandomRecipes(recipe, listRandomRecipes);
+        newRecipes(recipe, listRandomRecipes);
       }
+
       return;
     }
 
-    const response = await fetch(url);
-    const data = await response.json();
-    const newFilters = [];
+    const newFilters = await fetchRecipeByCategory(recipe, filter);
 
-    if (recipe === 'drink') {
-      const max = Math.min(12, data.drinks.length);
-      for (let i = 0; i < max; i += 1) {
-        const recipe = {
-          id: data.drinks[i].idDrink,
-          name: data.drinks[i].strDrink,
-          image: data.drinks[i].strDrinkThumb,
-        };
-        newFilters.push(recipe);
-      }
-      setListDrinks(newFilters);
+    if (isDrink) {
+      setListDrinks(newFilters as DrinksAPIFilter[]);
     } else {
-      const max = Math.min(12, data.meals.length);
-      for (let i = 0; i < max; i += 1) {
-        const recipe = {
-          id: data.meals[i].idMeal,
-          name: data.meals[i].strMeal,
-          image: data.meals[i].strMealThumb,
-        };
-        newFilters.push(recipe);
-      }
-      setListMeals(newFilters);
+      setListMeals(newFilters as MealsAPIFilter[]);
     }
+    console.log(listMeals);
   };
 
   const mealsValue = {

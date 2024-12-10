@@ -20,7 +20,6 @@ export default function RecipeInProgress() {
       if (id) {
         const recipeById = await fetchRecipeById(id, recipeType);
         setRecipe(recipeById);
-        console.log(recipeById);
       }
     };
 
@@ -75,9 +74,9 @@ export default function RecipeInProgress() {
 
     return (
       <div>
-        <HeaderDetails headerData={ { recipe: {id: recipe.id, name, image, alcoholic, category}, recipeType: 'drinks' } } />
+        <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, alcoholic, category }, recipeType: 'drinks' } } />
         <main>
-          <Ingredients ingredientsData={ { page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
+          <Ingredients ingredientsData={ { page: 'inProgress', id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
           <Instructions instructionsData={ { instructions } } />
         </main>
         {allChecked && (
@@ -102,7 +101,7 @@ export default function RecipeInProgress() {
       <div>
         <HeaderDetails headerData={ { recipe: { id: recipe.id, name, image, region, category }, recipeType: 'meals' } } />
         <main>
-          <Ingredients ingredientsData={ { page: 'inProgress',id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
+          <Ingredients ingredientsData={ { page: 'inProgress', id: recipe.id, ingredients, image, name, onAllChecked: changeAllChecked } } />
           <Instructions instructionsData={ { instructions } } />
         </main>
         {allChecked && (

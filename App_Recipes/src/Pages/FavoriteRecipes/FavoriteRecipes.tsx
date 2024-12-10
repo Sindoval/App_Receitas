@@ -26,13 +26,13 @@ export default function FavoriteRecipes() {
 
   return (
     <div>
-      <Header headerData={{title: 'FAVORITES', boolProfile: true, boolSearch: false}} />
-      <FilterFavorites filterData={{recipes: favoriteRecipes, allRecipes, updateRecipes}} />
+      <Header headerData={ { title: 'FAVORITES', boolProfile: true, boolSearch: false } } />
+      <FilterFavorites filterData={ { recipes: favoriteRecipes, allRecipes, updateRecipes } } />
       <main id="recipes">
-        {favoriteRecipes.map(({id, image, name, region, category, type,  alcoholic}) => (
+        {favoriteRecipes.map(({ id, image, name, region, category, type, alcoholic }) => (
           <CardDoneRecipe
-            key={id}
-            cardDoneData={{
+            key={ id }
+            cardDoneData={ {
               page: 'favorites',
               id,
               image,
@@ -41,7 +41,8 @@ export default function FavoriteRecipes() {
               region,
               type,
               alcoholic,
-            }}/>
+            } }
+          />
         ))}
       </main>
       <Footer />
